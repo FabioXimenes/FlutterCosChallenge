@@ -1,4 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cos_challenge/app/features/authentication/navigation/authentication_routes.dart';
+import 'package:flutter_cos_challenge/app/features/authentication/pages/cubits/user/user_cubit.dart';
+import 'package:flutter_cos_challenge/app/features/splash/navigation/splash_routes.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
+final _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    ...SplashRoutes.routes,
+    ...AuthenticationRoutes.routes,
+  ],
+  debugLogDiagnostics: true,
+);
 
 class CosChallengeApp extends StatelessWidget {
   const CosChallengeApp({super.key});
@@ -6,35 +21,19 @@ class CosChallengeApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Center(),
+      builder: (context, child) {
+        return BlocProvider(
+          create: (_) => UserCubit(GetIt.instance.get()),
+          child: child,
+        );
+      },
+      routerConfig: _router,
     );
   }
 }

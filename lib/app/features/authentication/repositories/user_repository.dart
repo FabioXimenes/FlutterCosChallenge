@@ -7,7 +7,7 @@ import 'package:flutter_cos_challenge/app/features/authentication/models/user.da
 abstract class UserRepository {
   Future<Either<Failure, User>> authenticate(
       {required String email, required String password});
-  Future<Either<Failure, User?>> getUser();
+  Future<Either<Failure, User>> getUser();
 }
 
 class UserRepositoryImpl implements UserRepository {
@@ -38,9 +38,12 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, User?>> getUser() async {
+  Future<Either<Failure, User>> getUser() async {
     try {
-      return Right(await _userLocalDataSource.getUser());
+      final user = await _userLocalDataSource.getUser();
+      if (user == null) return Left(GetUserFailure());
+
+      return Right(user);
     } catch (e) {
       return Left(GetUserFailure());
     }
