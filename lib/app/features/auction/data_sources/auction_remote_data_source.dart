@@ -1,13 +1,15 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_cos_challenge/app/core/clients/api_client.dart';
 import 'package:flutter_cos_challenge/app/core/clients/cos_challenge_client.dart';
+import 'package:flutter_cos_challenge/app/core/errors/exceptions.dart';
 import 'package:flutter_cos_challenge/app/features/auction/models/vehicle.dart';
 
 abstract class AuctionRemoteDataSource {
-  Future<List<Vehicle>> getAuctionDataFromVIN(String vin,
-      {required String authToken});
+  Future<List<Vehicle>> getAuctionDataFromVIN(
+    String vin, {
+    required String authToken,
+  });
 }
 
 class AuctionRemoteDataSourceImpl implements AuctionRemoteDataSource {
@@ -37,9 +39,9 @@ class AuctionRemoteDataSourceImpl implements AuctionRemoteDataSource {
     }
 
     if (response.statusCode == 400) {
-      throw HttpException(jsonDecode(response.body)['message']);
+      throw ServerException(jsonDecode(response.body)['message']);
     }
 
-    throw const HttpException('Failed to get auction data from VIN');
+    throw const ServerException('Failed to get auction data from VIN.');
   }
 }
