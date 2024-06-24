@@ -1,3 +1,4 @@
+import 'package:flutter_cos_challenge/app/features/auction/models/vehicle.dart';
 import 'package:flutter_cos_challenge/app/features/auction/pages/auction_details_page.dart';
 import 'package:flutter_cos_challenge/app/features/auction/pages/auction_vin_page.dart';
 import 'package:flutter_cos_challenge/app/features/auction/pages/vehicle_selection_page.dart';
@@ -17,7 +18,9 @@ class AuctionRoutes {
     GoRoute(
       name: vehicleSelection,
       path: '/auction/vehicle-selection',
-      builder: (context, state) => const VehicleSelectionPage(),
+      builder: (context, state) => VehicleSelectionPage(
+        vehicles: state.extra as List<Vehicle>,
+      ),
     ),
     GoRoute(
       name: details,
