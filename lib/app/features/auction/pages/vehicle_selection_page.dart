@@ -66,7 +66,7 @@ class _VehicleSelectionPageState extends State<VehicleSelectionPage> {
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
-                        context.pushNamed(
+                        context.pushReplacementNamed(
                           AuctionRoutes.details,
                           extra: (vehicle, false),
                         );

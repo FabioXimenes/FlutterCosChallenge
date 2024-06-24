@@ -25,7 +25,13 @@ class AuctionRoutes {
     GoRoute(
       name: details,
       path: '/auction/details',
-      builder: (context, state) => const AuctionDetailsPage(),
+      builder: (context, state) {
+        final (vehicle, isFromCache) = state.extra as (Vehicle, bool);
+        return AuctionDetailsPage(
+          vehicle: vehicle,
+          isFromCache: isFromCache,
+        );
+      },
     ),
   ];
 }

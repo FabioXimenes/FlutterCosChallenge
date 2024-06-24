@@ -149,8 +149,10 @@ class _AuctionVINPageState extends State<AuctionVINPage> {
 
                             await context
                                 .read<AuctionCubit>()
-                                .getAuctionDataFromVIN(vinController.text,
-                                    authToken: currentUserState.user.token!);
+                                .getAuctionDataFromVIN(
+                                  vinController.text,
+                                  authToken: currentUserState.user.token!,
+                                );
                           }
                         },
                       ),
