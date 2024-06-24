@@ -39,7 +39,13 @@ class _SignInPageState extends State<SignInPage> {
           context.goNamed(AuctionRoutes.initial);
         }
 
-        // TODO: Handle error
+        if (state is UserError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.failure.message),
+            ),
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(
