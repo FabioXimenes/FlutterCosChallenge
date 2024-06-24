@@ -13,7 +13,7 @@ abstract class AuctionRemoteDataSource {
 }
 
 class AuctionRemoteDataSourceImpl implements AuctionRemoteDataSource {
-  final String baseUrl = 'https://api.cos.com';
+  final String baseUrl = 'api.cos.com';
   final APIClient _apiClient;
 
   AuctionRemoteDataSourceImpl(this._apiClient);

@@ -17,7 +17,7 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
           : DateTime.parse(json['valuatedAt'] as String),
       feedback: json['feedback'] as String?,
       positiveCustomerFeedback: json['positiveCustomerFeedback'] as bool?,
-      auctionUuid: json['_fk_uuid_auction'] as String,
+      auctionUuid: json['_fk_uuid_auction'] as String?,
       price: (json['price'] as num?)?.toDouble(),
     );
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cos_challenge/app/core/core_resources_startup.dart';
 import 'package:flutter_cos_challenge/app/core/resources_startup/resources_startup.dart';
 import 'package:flutter_cos_challenge/app/cos_challenge_app.dart';
+import 'package:flutter_cos_challenge/app/features/auction/auction_resources_startup.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/authentication_resources_startup.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,5 +18,6 @@ class Resources {
   static final List<ResourcesStartup> resources = [
     CoreResourcesStartup(),
     AuthenticationResourcesStartup(),
+    AuctionResourcesStartup(),
   ];
 }

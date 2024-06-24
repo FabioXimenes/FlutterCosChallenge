@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cos_challenge/app/core/widgets/primary_button_widget.dart';
+import 'package:flutter_cos_challenge/app/features/auction/navigation/auction_routes.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/pages/cubits/user/user_cubit.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -33,9 +36,10 @@ class _SignInPageState extends State<SignInPage> {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is UserLoaded) {
-          // TODO: Go to VIN page
-          print('User loaded');
+          context.goNamed(AuctionRoutes.initial);
         }
+
+        // TODO: Handle error
       },
       builder: (context, state) {
         return Scaffold(
@@ -109,42 +113,17 @@ class _SignInPageState extends State<SignInPage> {
                             },
                           ),
                           const SizedBox(height: 32),
-                          FilledButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 42),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4)),
-                                )),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (state is UserLoading)
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 8.0),
-                                    child: SizedBox(
-                                      width: 16,
-                                      height: 16,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                const Text('Sign In'),
-                              ],
-                            ),
+                          PrimaryButtonWidget(
+                            text: 'Sign In',
                             onPressed: () {
-                              if (state is! UserLoading &&
-                                  (formKey.currentState?.validate() ?? false)) {
+                              if (formKey.currentState?.validate() ?? false) {
                                 context.read<UserCubit>().authenticate(
                                       email: emailController.text,
                                       password: passwordController.text,
                                     );
                               }
                             },
+                            isLoading: state is UserLoading,
                           ),
                         ],
                       ),

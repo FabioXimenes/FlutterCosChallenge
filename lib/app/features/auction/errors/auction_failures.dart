@@ -18,3 +18,13 @@ class AuctionDataFromVINUnknownFailure extends Failure {
   @override
   String get message => 'Failed to get auction data from VIN.';
 }
+
+class NoCachedAuctionDataFailure extends Failure {
+  @override
+  String get message => 'No cached auction data found for the provided VIN.';
+}
+
+class GetAuctionDataFromCacheFailure extends Failure {
+  @override
+  String get message => 'Failed to get auction data from cache.';
+}

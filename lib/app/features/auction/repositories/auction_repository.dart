@@ -13,6 +13,8 @@ abstract class AuctionRepository {
     String vin, {
     required String authToken,
   });
+
+  Future<Either<Failure, Vehicle>> getAuctionDataFromCache(String vin);
 }
 
 class AuctionRepositoryImpl implements AuctionRepository {
@@ -52,6 +54,19 @@ class AuctionRepositoryImpl implements AuctionRepository {
       return Left(GetAuctionDataFromVINFailure(e.message));
     } catch (e) {
       return Left(AuctionDataFromVINUnknownFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Vehicle>> getAuctionDataFromCache(String vin) async {
+    try {
+      final vehicle = await _localDataSource.getAuctionDataFromVIN(vin);
+      if (vehicle == null) {
+        return Left(NoCachedAuctionDataFailure());
+      }
+      return Right(vehicle);
+    } catch (_) {
+      return Left(GetAuctionDataFromCacheFailure());
     }
   }
 }

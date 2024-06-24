@@ -14,7 +14,7 @@ class Vehicle extends Equatable {
   final String? feedback;
   final bool? positiveCustomerFeedback;
   @JsonKey(name: '_fk_uuid_auction')
-  final String auctionUuid;
+  final String? auctionUuid;
   final double? price;
 
   const Vehicle({

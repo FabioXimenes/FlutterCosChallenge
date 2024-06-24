@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cos_challenge/app/features/auction/navigation/auction_routes.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/navigation/authentication_routes.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/pages/cubits/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
         if (state is UserLoaded) {
-          // TODO: Go to VIN page
+          context.goNamed(AuctionRoutes.initial);
         }
 
         if (state is UserError || state is UserInitial) {
