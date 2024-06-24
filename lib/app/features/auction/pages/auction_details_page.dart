@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cos_challenge/app/core/widgets/alert_widget.dart';
 import 'package:flutter_cos_challenge/app/features/auction/models/vehicle.dart';
 import 'package:intl/intl.dart';
 
@@ -95,45 +96,12 @@ class _FeedbackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: isPositive
+    return AlertWidget(
+      message: feedback,
+      backgroundColor: isPositive
           ? Colors.greenAccent[100]?.withOpacity(0.7)
           : Colors.redAccent[100]?.withOpacity(0.7),
-      shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 12,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  isPositive ? Icons.info : Icons.warning,
-                  size: 18,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    feedback,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          height: 1.15,
-                        ),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      icon: isPositive ? Icons.info : Icons.warning,
     );
   }
 }
@@ -143,43 +111,11 @@ class _CacheInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.amberAccent[100]?.withOpacity(0.7),
-      shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 12,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.warning,
-                  size: 18,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'We had a problem processing your request. You are seeing the last fetched data for the provided VIN which may be outdated.',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          height: 1.15,
-                        ),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    return AlertWidget(
+      message:
+          'We had a problem processing your request. You are seeing the last fetched data for the provided VIN which may be outdated.',
+      icon: Icons.warning,
+      backgroundColor: Colors.amberAccent[100],
     );
   }
 }

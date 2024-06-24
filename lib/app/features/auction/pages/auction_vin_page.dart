@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cos_challenge/app/core/clients/cos_challenge_client.dart';
+import 'package:flutter_cos_challenge/app/core/widgets/alert_widget.dart';
 import 'package:flutter_cos_challenge/app/core/widgets/primary_button_widget.dart';
 import 'package:flutter_cos_challenge/app/features/auction/navigation/auction_routes.dart';
 import 'package:flutter_cos_challenge/app/features/auction/pages/cubits/auction/auction_cubit.dart';
@@ -94,43 +95,12 @@ class _AuctionVINPageState extends State<AuctionVINPage> {
                       ),
                       if (state is AuctionError) ...[
                         const SizedBox(height: 16),
-                        Card(
-                          color: Colors.red[100]?.withOpacity(0.7),
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          margin: EdgeInsets.zero,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 8,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                  size: 18,
-                                ),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: Text(
-                                    state.failure.message,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: Colors.red,
-                                          height: 1.15,
-                                        ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        AlertWidget(
+                          message: state.failure.message,
+                          icon: Icons.error,
+                          backgroundColor: Colors.red[100],
+                          iconColor: Colors.red,
+                          textColor: Colors.red,
                         ),
                       ],
                       const SizedBox(height: 16),
