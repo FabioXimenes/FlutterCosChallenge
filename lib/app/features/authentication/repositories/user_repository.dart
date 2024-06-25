@@ -3,6 +3,7 @@ import 'package:flutter_cos_challenge/app/core/errors/failures.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/data_sources/user_local_data_source.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/errors/user_failures.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/models/user.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, User>> authenticate(
@@ -25,7 +26,14 @@ class UserRepositoryImpl implements UserRepository {
     // used to authenticate other requests). If the "fake" request fails, it
     // would return Left(Failure).
     await Future.delayed(const Duration(seconds: 1));
-    final user = User(email: email, password: password, token: 'token');
+
+    // Generate a random UUID to simulate a token. In a real app, the token
+    // would probably be JWT.
+    final user = User(
+      email: email,
+      password: password,
+      token: const Uuid().v4(),
+    );
 
     try {
       await _userLocalDataSource.cacheUser(user);
