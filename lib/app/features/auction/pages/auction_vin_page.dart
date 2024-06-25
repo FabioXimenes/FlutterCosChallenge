@@ -4,7 +4,7 @@ import 'package:flutter_cos_challenge/app/core/clients/cos_challenge_client.dart
 import 'package:flutter_cos_challenge/app/core/widgets/alert_widget.dart';
 import 'package:flutter_cos_challenge/app/core/widgets/primary_button_widget.dart';
 import 'package:flutter_cos_challenge/app/features/auction/navigation/auction_routes.dart';
-import 'package:flutter_cos_challenge/app/features/auction/pages/cubits/auction/auction_cubit.dart';
+import 'package:flutter_cos_challenge/app/features/auction/pages/cubit/auction_cubit.dart';
 import 'package:flutter_cos_challenge/app/features/auction/repositories/auction_repository.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/navigation/authentication_routes.dart';
 import 'package:flutter_cos_challenge/app/features/authentication/pages/cubits/user/user_cubit.dart';
