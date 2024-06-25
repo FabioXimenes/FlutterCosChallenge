@@ -13,6 +13,8 @@ abstract class AuctionRemoteDataSource {
 }
 
 class AuctionRemoteDataSourceImpl implements AuctionRemoteDataSource {
+  // In a real application, this would be injected and would come from be an
+  // environment config file.
   final String baseUrl = 'api.cos.com';
   final APIClient _apiClient;
 
