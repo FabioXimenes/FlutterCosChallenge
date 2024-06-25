@@ -56,9 +56,18 @@ class _AuctionVINPageState extends State<AuctionVINPage> {
         },
         builder: (context, state) {
           return Scaffold(
+            appBar: AppBar(actions: [
+              IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: () {
+                  context.read<UserCubit>().logout();
+                  context.goNamed(AuthenticationRoutes.signIn);
+                },
+              ),
+            ]),
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(top: 64, left: 16, right: 16),
+                padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -112,7 +121,7 @@ class _AuctionVINPageState extends State<AuctionVINPage> {
                             final userCubit = context.read<UserCubit>();
 
                             final currentUserState = userCubit.state;
-                            if (currentUserState is! UserLoaded) {
+                            if (currentUserState is! UserLoggedIn) {
                               context.goNamed(AuthenticationRoutes.signIn);
                               return;
                             }

@@ -8,6 +8,7 @@ const key = 'user';
 abstract class UserLocalDataSource {
   Future<void> cacheUser(User user);
   Future<User?> getUser();
+  Future<void> deleteUser();
 }
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
@@ -28,5 +29,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       return User.fromJson(jsonDecode(userString));
     }
     return null;
+  }
+
+  @override
+  Future<void> deleteUser() {
+    return _localStorageClient.delete(key);
   }
 }

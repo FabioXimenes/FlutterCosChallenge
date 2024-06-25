@@ -8,6 +8,7 @@ abstract class UserRepository {
   Future<Either<Failure, User>> authenticate(
       {required String email, required String password});
   Future<Either<Failure, User>> getUser();
+  Future<Either<Failure, Unit>> logout();
 }
 
 class UserRepositoryImpl implements UserRepository {
@@ -46,6 +47,16 @@ class UserRepositoryImpl implements UserRepository {
       return Right(user);
     } catch (e) {
       return Left(GetUserFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> logout() async {
+    try {
+      await _userLocalDataSource.deleteUser();
+      return const Right(unit);
+    } catch (e) {
+      return Left(LogoutFailure());
     }
   }
 }

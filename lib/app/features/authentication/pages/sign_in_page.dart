@@ -35,7 +35,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
-        if (state is UserLoaded) {
+        if (state is UserLoggedIn) {
           context.goNamed(AuctionRoutes.initial);
         }
 

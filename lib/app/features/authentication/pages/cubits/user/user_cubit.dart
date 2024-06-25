@@ -9,7 +9,7 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   final UserRepository userRepository;
 
-  UserCubit(this.userRepository) : super(UserInitial());
+  UserCubit(this.userRepository) : super(UserLoggedOut());
 
   Future<void> getUser() async {
     emit(UserLoading());
@@ -18,7 +18,7 @@ class UserCubit extends Cubit<UserState> {
 
     userEither.fold(
       (failure) => emit(UserError(failure)),
-      (user) => emit(UserLoaded(user)),
+      (user) => emit(UserLoggedIn(user)),
     );
   }
 
@@ -35,7 +35,18 @@ class UserCubit extends Cubit<UserState> {
 
     userEither.fold(
       (failure) => emit(UserError(failure)),
-      (user) => emit(UserLoaded(user)),
+      (user) => emit(UserLoggedIn(user)),
+    );
+  }
+
+  Future<void> logout() async {
+    emit(UserLoading());
+
+    final logoutEither = await userRepository.logout();
+
+    logoutEither.fold(
+      (failure) => emit(UserError(failure)),
+      (_) => emit(UserLoggedOut()),
     );
   }
 }

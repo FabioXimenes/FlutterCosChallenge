@@ -4,3 +4,8 @@ class GetUserFailure extends Failure {
   @override
   String get message => 'Failed to get user from local storage.';
 }
+
+class LogoutFailure extends Failure {
+  @override
+  String get message => 'Failed to logout.';
+}

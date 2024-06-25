@@ -7,7 +7,7 @@ sealed class UserState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class UserInitial extends UserState {}
+final class UserLoggedOut extends UserState {}
 
 final class UserLoading extends UserState {}
 
@@ -20,10 +20,10 @@ final class UserError extends UserState {
   List<Object?> get props => [failure];
 }
 
-final class UserLoaded extends UserState {
+final class UserLoggedIn extends UserState {
   final User user;
 
-  const UserLoaded(this.user);
+  const UserLoggedIn(this.user);
 
   @override
   List<Object?> get props => [user];

@@ -29,11 +29,11 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
-        if (state is UserLoaded) {
+        if (state is UserLoggedIn) {
           context.goNamed(AuctionRoutes.initial);
         }
 
-        if (state is UserError || state is UserInitial) {
+        if (state is UserError || state is UserLoggedOut) {
           context.goNamed(AuthenticationRoutes.signIn);
         }
       },
