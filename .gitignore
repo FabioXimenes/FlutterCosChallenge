@@ -44,3 +44,7 @@ app.*.map.json
 
 # FVM
 .fvm/
+
+# Goldens
+# don't check in golden failure output
+**/failures/*.png
