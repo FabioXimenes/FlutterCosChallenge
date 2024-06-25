@@ -55,21 +55,14 @@ class _SignInPageState extends State<SignInPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       'Sign In!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        height: 1.35,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'Welcome to Cos Challenge! Please sign in to continue.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        height: 1.35,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
